@@ -1,0 +1,2 @@
+[console_scripts]
+estoque-solidario = estoque_solidario.cli:main

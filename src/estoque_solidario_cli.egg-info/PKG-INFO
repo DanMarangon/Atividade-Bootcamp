@@ -1,0 +1,154 @@
+Metadata-Version: 2.4
+Name: estoque-solidario-cli
+Version: 1.0.0
+Summary: CLI para organizar doações e distribuição de itens essenciais.
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+
+# Estoque Solidário CLI
+
+Aplicação de linha de comando criada para ajudar ONGs, igrejas, cozinhas solidárias e projetos comunitários a organizarem doações e distribuição de itens essenciais. O foco é reduzir desperdício, evitar entregas de produtos vencidos e facilitar o controle do estoque para famílias em situação de vulnerabilidade.
+
+## Problema real
+
+Muitos projetos sociais recebem doações de alimentos, higiene e limpeza, mas fazem o controle manual em papel ou mensagens soltas. Isso pode gerar perda de itens, falta de rastreabilidade, dificuldade para saber o que está vencendo e risco de distribuir produtos fora da validade.
+
+## Proposta da solução
+
+O `Estoque Solidário CLI` oferece um menu simples em terminal para:
+
+- registrar novas doações;
+- registrar distribuições para a comunidade;
+- listar o estoque atual;
+- visualizar alertas de vencimento e de baixo estoque.
+
+## Público-alvo
+
+- voluntários de projetos sociais;
+- cozinhas solidárias;
+- bancos de alimentos;
+- pequenas ONGs e ações comunitárias.
+
+## Funcionalidades principais
+
+- cadastro de lotes doados com item, categoria, quantidade, validade e doador;
+- registro de saída de itens por nome, respeitando o estoque disponível;
+- listagem organizada do estoque atual;
+- relatório com total de lotes, total de unidades, itens com baixo estoque, lotes vencidos e lotes próximos do vencimento;
+- persistência automática em arquivo JSON.
+
+## Tecnologias utilizadas
+
+- Python 3.13
+- Biblioteca padrão do Python
+- `pytest` para testes automatizados
+- `ruff` para lint/análise estática
+- GitHub Actions para integração contínua
+
+## Estrutura do projeto
+
+```text
+estoque-solidario-cli/
+|-- .github/workflows/ci.yml
+|-- data/
+|-- docs/
+|-- pyproject.toml
+|-- README.md
+|-- src/estoque_solidario/
+`-- tests/
+```
+
+## Instalação
+
+1. Entre na pasta do projeto:
+
+```powershell
+cd c:\Users\Dan\Desktop\.net\estoque-solidario-cli
+```
+
+2. Crie um ambiente virtual:
+
+```powershell
+py -m venv .venv
+```
+
+3. Ative o ambiente virtual:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+4. Instale o projeto com dependências de desenvolvimento:
+
+```powershell
+py -m pip install -e .[dev]
+```
+
+## Execução
+
+Execute a aplicação com:
+
+```powershell
+py -m estoque_solidario
+```
+
+Na primeira execução, o arquivo `data/dados.json` será criado automaticamente.
+
+## Como rodar os testes
+
+```powershell
+py -m pytest
+```
+
+## Como rodar o lint
+
+```powershell
+py -m ruff check .
+py -m ruff format --check .
+```
+
+## Versionamento semântico
+
+Versão atual: `1.0.0`
+
+## Dependências declaradas
+
+As dependências e metadados do projeto estão declarados em `pyproject.toml`.
+
+## Evidência de funcionamento
+
+Exemplo de uso esperado:
+
+```text
+Menu principal
+1. Registrar doação
+2. Registrar distribuição
+3. Listar estoque
+4. Ver relatório
+5. Sair
+
+Doação registrada com sucesso.
+Distribuição registrada com sucesso.
+
+Relatório do estoque
+Total de lotes ativos: 2
+Total de unidades disponíveis: 18
+Itens com baixo estoque:
+- Leite em pó: 3 unidades
+```
+
+## Autor
+
+`[SEU NOME AQUI]`
+
+## Disciplina
+
+`[NOME DA DISCIPLINA AQUI]`
+
+## Repositório público
+
+`[COLE AQUI O LINK DO REPOSITÓRIO PÚBLICO NO GITHUB]`
+
