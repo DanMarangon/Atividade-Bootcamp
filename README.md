@@ -138,5 +138,5 @@ Itens com baixo estoque:
 
 ## Repositório público
 
-`[COLE AQUI O LINK DO REPOSITÓRIO PÚBLICO NO GITHUB]`
+`https://github.com/DanMarangon/Atividade-Bootcamp`
 
