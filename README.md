@@ -132,11 +132,9 @@ Itens com baixo estoque:
 
 ## Autor
 
-`[SEU NOME AQUI]`
+`Dan Ramos Marques Marangon`
 
-## Disciplina
 
-`[NOME DA DISCIPLINA AQUI]`
 
 ## Repositório público
 
