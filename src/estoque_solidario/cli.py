@@ -5,6 +5,7 @@ from datetime import date
 from estoque_solidario.exceptions import BusinessRuleError, ValidationError
 from estoque_solidario.repository import JsonRepository
 from estoque_solidario.service import CATEGORIAS, EstoqueService
+from estoque_solidario.viacep import CepInvalidoError, CepNaoEncontradoError, ViaCepError
 
 
 def main() -> None:
@@ -34,10 +35,12 @@ class ConsoleApp:
             elif opcao == "4":
                 self._exibir_relatorio()
             elif opcao == "5":
+                self._consultar_endereco_por_cep()
+            elif opcao == "6":
                 print("Aplicação encerrada. Até a próxima!")
                 return
             else:
-                print("Opção inválida. Escolha um número entre 1 e 5.")
+                print("Opção inválida. Escolha um número entre 1 e 6.")
 
             print()
 
@@ -56,7 +59,8 @@ class ConsoleApp:
         print("2. Registrar distribuição")
         print("3. Listar estoque")
         print("4. Ver relatório")
-        print("5. Sair")
+        print("5. Consultar endereço por CEP")
+        print("6. Sair")
 
     def _registrar_doacao(self) -> None:
         print("Registro de doação")
@@ -140,6 +144,27 @@ class ConsoleApp:
                 print(f"- {lote.nome_item} | validade {lote.validade.strftime('%d/%m/%Y')}")
         else:
             print("- Nenhum lote próximo do vencimento.")
+
+    def _consultar_endereco_por_cep(self) -> None:
+        print("Consulta de endereço por CEP")
+        print("------------------------------------------")
+
+        try:
+            cep = self._ler_texto_obrigatorio("CEP: ")
+            endereco = self.service.consultar_endereco_por_cep(cep)
+        except (CepInvalidoError, CepNaoEncontradoError, ViaCepError) as error:
+            print(f"Não foi possível consultar o CEP: {error}")
+            return
+
+        print("Endereço encontrado")
+        print(f"CEP: {endereco.cep}")
+        if endereco.logradouro:
+            print(f"Logradouro: {endereco.logradouro}")
+        if endereco.complemento:
+            print(f"Complemento: {endereco.complemento}")
+        if endereco.bairro:
+            print(f"Bairro: {endereco.bairro}")
+        print(f"Cidade/UF: {endereco.cidade}/{endereco.uf}")
 
     @staticmethod
     def _ler_texto_obrigatorio(mensagem: str) -> str:
