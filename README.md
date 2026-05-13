@@ -77,7 +77,8 @@ estoque-solidario-cli/
 1. Entre na pasta do projeto:
 
 ```powershell
-cd c:\Users\Dan\Desktop\.net\estoque-solidario-cli
+git clone https://github.com/DanMarangon/Atividade-Bootcamp.git
+cd Atividade-Bootcamp
 ```
 
 2. Crie um ambiente virtual:
