@@ -1,5 +1,9 @@
 # Estoque Solidário CLI
 
+**Deploy publicado:** https://danmarangon.github.io/Atividade-Bootcamp/
+
+**Issue da demanda:** https://github.com/DanMarangon/Atividade-Bootcamp/issues/1
+
 Aplicação de linha de comando criada para ajudar ONGs, igrejas, cozinhas solidárias e projetos comunitários a organizarem doações e distribuição de itens essenciais. O foco é reduzir desperdício, evitar entregas de produtos vencidos e facilitar o controle do estoque para famílias em situação de vulnerabilidade.
 
 ## Problema real
@@ -28,15 +32,32 @@ O `Estoque Solidário CLI` oferece um menu simples em terminal para:
 - registro de saída de itens por nome, respeitando o estoque disponível;
 - listagem organizada do estoque atual;
 - relatório com total de lotes, total de unidades, itens com baixo estoque, lotes vencidos e lotes próximos do vencimento;
+- consulta de endereço por CEP usando a API pública ViaCEP;
 - persistência automática em arquivo JSON.
+
+## Integração com API pública
+
+A etapa intermediária adicionou uma integração HTTP GET com a API pública [ViaCEP](https://viacep.com.br/).
+
+No menu da aplicação, a opção `5. Consultar endereço por CEP` recebe um CEP informado pelo usuário, consulta o serviço externo e exibe os dados retornados:
+
+- CEP;
+- logradouro;
+- complemento, quando existir;
+- bairro;
+- cidade e UF.
+
+A aplicação também trata CEP inválido, CEP não encontrado e falhas de comunicação com a API.
 
 ## Tecnologias utilizadas
 
 - Python 3.13
 - Biblioteca padrão do Python
+- API pública ViaCEP
 - `pytest` para testes automatizados
 - `ruff` para lint/análise estática
 - GitHub Actions para integração contínua
+- GitHub Pages para publicação da página de entrega
 
 ## Estrutura do projeto
 
@@ -93,6 +114,8 @@ Na primeira execução, o arquivo `data/dados.json` será criado automaticamente
 py -m pytest
 ```
 
+O teste de integração `tests/test_viacep_integration.py` valida o fluxo HTTP da consulta ViaCEP usando um servidor local simulado, sem depender da disponibilidade da API real durante a execução da pipeline.
+
 ## Como rodar o lint
 
 ```powershell
@@ -100,9 +123,19 @@ py -m ruff check .
 py -m ruff format --check .
 ```
 
+## Deploy / publicação
+
+A aplicação é CLI, então a publicação foi feita por meio de uma página estática no GitHub Pages com o resumo da entrega, link do repositório e instruções de execução:
+
+```text
+https://danmarangon.github.io/Atividade-Bootcamp/
+```
+
+O deploy é executado pelo workflow `.github/workflows/pages.yml` quando alterações são enviadas para a branch `main`.
+
 ## Versionamento semântico
 
-Versão atual: `1.0.0`
+Versão atual: `1.1.0`
 
 ## Dependências declaradas
 
@@ -118,10 +151,19 @@ Menu principal
 2. Registrar distribuição
 3. Listar estoque
 4. Ver relatório
-5. Sair
+5. Consultar endereço por CEP
+6. Sair
 
 Doação registrada com sucesso.
 Distribuição registrada com sucesso.
+
+Consulta de endereço por CEP
+CEP: 01001-000
+Endereço encontrado
+CEP: 01001-000
+Logradouro: Praça da Sé
+Bairro: Sé
+Cidade/UF: São Paulo/SP
 
 Relatório do estoque
 Total de lotes ativos: 2

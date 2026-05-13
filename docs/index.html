@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Estoque Solidario CLI</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #14213d;
+        --muted: #5f6c7b;
+        --line: #d7dee8;
+        --brand: #0f766e;
+        --soft: #f7fafc;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+        background: #ffffff;
+        line-height: 1.55;
+      }
+
+      header,
+      main {
+        width: min(1040px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 48px 0 28px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        line-height: 1.08;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+        margin-bottom: 12px;
+      }
+
+      p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        max-width: 72ch;
+      }
+
+      a {
+        color: var(--brand);
+        font-weight: 700;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 28px;
+        padding: 34px 0;
+        align-items: start;
+      }
+
+      .terminal {
+        background: #101820;
+        color: #f8fafc;
+        border-radius: 8px;
+        padding: 18px;
+        font-family: "Cascadia Mono", "Fira Code", Consolas, monospace;
+        font-size: 0.95rem;
+        overflow-x: auto;
+        border: 1px solid #273444;
+      }
+
+      .terminal span {
+        color: #5eead4;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin: 10px 0 38px;
+      }
+
+      .item {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 18px;
+        background: var(--soft);
+      }
+
+      .item strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .item p {
+        margin: 0;
+      }
+
+      .commands {
+        border-top: 1px solid var(--line);
+        padding: 30px 0 54px;
+      }
+
+      code {
+        background: #edf2f7;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 2px 6px;
+      }
+
+      pre {
+        margin: 14px 0 0;
+        padding: 16px;
+        background: #f1f5f9;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow-x: auto;
+      }
+
+      @media (max-width: 760px) {
+        .summary,
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        header {
+          padding-top: 34px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Estoque Solidario CLI</h1>
+      <p>
+        Aplicacao de linha de comando para organizar doacoes, distribuicoes e alertas de
+        estoque em projetos sociais, agora com consulta de endereco por CEP usando a API
+        publica ViaCEP.
+      </p>
+    </header>
+
+    <main>
+      <section class="summary" aria-label="Resumo da aplicacao">
+        <div>
+          <h2>Publicacao da etapa intermediaria</h2>
+          <p>
+            Esta pagina documenta a entrega publicada do projeto e aponta para o codigo-fonte,
+            testes automatizados e fluxo de execucao da aplicacao CLI.
+          </p>
+          <p>
+            Repositorio:
+            <a href="https://github.com/DanMarangon/Atividade-Bootcamp"
+              >github.com/DanMarangon/Atividade-Bootcamp</a
+            >
+          </p>
+        </div>
+
+        <div class="terminal" aria-label="Exemplo da consulta ViaCEP no terminal">
+          <span>$</span> py -m estoque_solidario<br />
+          Menu principal<br />
+          5. Consultar endereco por CEP<br /><br />
+          CEP: 01001-000<br />
+          Endereco encontrado<br />
+          Cidade/UF: Sao Paulo/SP
+        </div>
+      </section>
+
+      <section class="grid" aria-label="Funcionalidades">
+        <article class="item">
+          <strong>Controle de doacoes</strong>
+          <p>Registra lotes com item, categoria, quantidade, validade e doador.</p>
+        </article>
+        <article class="item">
+          <strong>Relatorios de estoque</strong>
+          <p>Mostra baixo estoque, lotes vencidos e itens proximos da validade.</p>
+        </article>
+        <article class="item">
+          <strong>Integracao ViaCEP</strong>
+          <p>Consulta endereco por CEP via HTTP GET e exibe os dados no terminal.</p>
+        </article>
+      </section>
+
+      <section class="commands" aria-label="Como executar">
+        <h2>Como executar localmente</h2>
+        <p>Instale o projeto com as dependencias de desenvolvimento e rode o CLI.</p>
+        <pre><code>py -m pip install -e .[dev]
+py -m estoque_solidario</code></pre>
+        <p>Validacao automatizada:</p>
+        <pre><code>py -m pytest
+py -m ruff check .
+py -m ruff format --check .</code></pre>
+      </section>
+    </main>
+  </body>
+</html>

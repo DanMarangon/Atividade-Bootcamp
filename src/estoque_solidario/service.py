@@ -7,6 +7,7 @@ from uuid import uuid4
 from estoque_solidario.exceptions import BusinessRuleError, ValidationError
 from estoque_solidario.models import Lote, RelatorioEstoque
 from estoque_solidario.repository import JsonRepository
+from estoque_solidario.viacep import EnderecoCep, ViaCepClient
 
 CATEGORIAS = [
     "Alimentos não perecíveis",
@@ -21,8 +22,9 @@ DIAS_ALERTA_VALIDADE = 7
 
 
 class EstoqueService:
-    def __init__(self, repository: JsonRepository) -> None:
+    def __init__(self, repository: JsonRepository, cep_client: ViaCepClient | None = None) -> None:
         self.repository = repository
+        self.cep_client = cep_client or ViaCepClient()
 
     def registrar_doacao(
         self,
@@ -96,6 +98,9 @@ class EstoqueService:
     def listar_estoque(self) -> list[Lote]:
         lotes = [lote for lote in self.repository.load_lotes() if lote.quantidade > 0]
         return sorted(lotes, key=lambda item: (item.validade, item.nome_item.lower()))
+
+    def consultar_endereco_por_cep(self, cep: str) -> EnderecoCep:
+        return self.cep_client.consultar(cep)
 
     def gerar_relatorio(self, data_referencia: date | None = None) -> RelatorioEstoque:
         referencia = data_referencia or date.today()
