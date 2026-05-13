@@ -131,7 +131,7 @@ A aplicação é CLI, então a publicação foi feita por meio de uma página es
 https://danmarangon.github.io/Atividade-Bootcamp/
 ```
 
-O deploy é executado pelo workflow `.github/workflows/pages.yml` quando alterações são enviadas para a branch `main`.
+O GitHub Pages está configurado para publicar a pasta `/docs` da branch `main`.
 
 ## Versionamento semântico
 
